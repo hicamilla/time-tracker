@@ -1,0 +1,209 @@
+:root {
+	/*Fonts*/
+	--font-title: "Poppins", sans-serif;
+	--font-body: "JetBrains Mono", monospace;
+}
+
+/*Basic page setup*/
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: var(--font-title);
+	background-color: #ffffff;
+	color: #333333;
+	line-height: 1.6;
+}
+
+/*Main Container*/
+.container {
+	max-width: 950px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+/*Title Selection*/
+.title-section {
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+.main-title {
+	font-size: 48px;
+	margin-bottom: 10px;
+	color: #333333;
+}
+
+.subtitle {
+	font-size: 16px;
+	color: #666666;
+}
+
+/*Search section*/
+.search-section {
+	margin-bottom: 40px;
+}
+
+.search-label {
+	display: block;
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+
+.search-button {
+	width: 100%;
+	padding: 12px 16px;
+	font-size: 16px;
+	border: 2px solid #cccccc;
+	border-radius: 8px;
+	background-color: white;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.search-button:hover {
+	border-color: #999999;
+}
+
+/*Local Time Styling*/
+.local-time-section {
+	text-align: center;
+	padding: 40px 0;
+	border-bottom: 2px solid #eeeeee;
+	margin-bottom: 40px;
+}
+
+.local-time-label {
+	font-size: 18px;
+	color: #666666;
+	margin-bottom: 20px;
+}
+
+.big-time {
+	font-size: 64px;
+	font-family: var(--font-body);
+	margin-bottom: 10px;
+}
+
+.big-date {
+	font-size: 24px;
+	color: #666666;
+	margin-bottom: 10px;
+}
+
+.timezone-info {
+	font-size: 14px;
+	color: #666666;
+}
+
+/*City Cards Section*/
+.cards-section {
+	margin-bottom: 60px;
+}
+
+.cards-title {
+	text-align: center;
+	font-size: 32px;
+	margin-bottom: 30px;
+}
+
+.cards-container {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 20px;
+}
+
+/*Individual Card*/
+.city-card {
+	background-color: white;
+	border: 1px solid #dddddd;
+	border-radius: 12px;
+	padding: 20px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	position: relative;
+}
+
+.city-name {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.country-name {
+	font-size: 14px;
+	color: #666666;
+	margin-bottom: 20px;
+}
+
+.card-time {
+	font-size: 32px;
+	font-family: var(--font-title);
+	margin-bottom: 5px;
+}
+
+.card-date {
+	font-size: 14px;
+	color: #666666;
+}
+
+/*Close Button*/
+.close-button {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 30px;
+	height: 30px;
+	border: 1px solid #cccccc;
+	border-radius: 6px;
+	background-color: white;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 18px;
+}
+
+.close-button:hover {
+	background-color: #f5f5f5;
+}
+
+/*Footer Signature*/
+.footer {
+	text-align: center;
+	padding-top: 40px;
+	border-top: 1px solid #eeeeee;
+	margin-top: 60px;
+}
+
+.signature {
+	font-size: 14px;
+	color: #666666;
+}
+
+.signature a {
+	text-decoration: none;
+}
+
+/*Repsonsive*/
+@media (max-width: 768px) {
+	.container {
+		padding: 15px;
+	}
+
+	.main-title {
+		font-size: 36px;
+	}
+
+	.big-time {
+		font-size: 48px;
+	}
+
+	.cards-container {
+		grid-template-columns: 1fr;
+	}
+}
