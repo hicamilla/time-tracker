@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
     rel="stylesheet">
   <!--CSS-->
   <link rel="stylesheet" href="./css/style.css">
@@ -26,11 +26,16 @@
 
     <!--Search section with dropdown-->
     <div class="search-section">
-      <label class="search-label">Select a city to add to your world clock</label>
-      <button class="search-button">
-        <span>Select a city...</span>
-        <span>▼</span>
-      </button>
+      <form class="search-form" aria-label="Add a city to your world clock" onchange="this.requestSubmit()">
+        <label for="city-select" class="search-label">Select a city to add to your world clock</label>
+        <select id="city-select" class="search-dropdown" name="city" aria-label="City dropdown" required>
+          <option value="America/New_York">New York</option>
+          <option value="Europe/London">London</option>
+          <option value="Asia/Tokyo">Tokyo</option>
+          <option value="Europe/Paris">Paris</option>
+          <option value="Australia/Sydney">Sydney</option>
+        </select>
+      </form>
     </div>
 
     <!--Local time (big display)-->
@@ -48,27 +53,24 @@
 
         <!--City Firsts Card-->
         <div class="city-card">
-          <button class="close-button">x</button>
           <h3 class="city-name">New York</h3>
-          <p class="country=name"> United States</p>
+          <p class="country-name"> United States</p>
           <p class="card-time">--:--:-- --</p>
           <p class="card-date">---, -- --</p>
         </div>
 
         <!--City Second Card-->
         <div class="city-card">
-          <button class="close-button">x</button>
           <h3 class="city-name">London</h3>
-          <p class="country=name"> United Kingdom</p>
+          <p class="country-name"> United Kingdom</p>
           <p class="card-time">--:--:-- --</p>
           <p class="card-date">---, -- --</p>
         </div>
 
         <!--City Third Card-->
         <div class="city-card">
-          <button class="close-button">x</button>
           <h3 class="city-name">Tokyo</h3>
-          <p class="country=name"> Japan</p>
+          <p class="country-name"> Japan</p>
           <p class="card-time">--:--:-- --</p>
           <p class="card-date">---, -- --</p>
         </div>
