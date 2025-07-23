@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,75 +15,88 @@
   <link rel="stylesheet" href="./css/style.css">
   <title>Time Tracker</title>
 </head>
+
 <body>
   <div class="container">
     <!--Title-->
     <header>
-        <div class="title-section">
-          <h1 class="main-title">Time Tracker</h1>
-          <p class="subtitle">Keep track of time across the world</p>
-        </div>
+      <div class="title-section">
+        <h1 class="main-title">Time Tracker</h1>
+        <p class="subtitle">Keep track of time across the world</p>
+      </div>
     </header>
 
-    <!--Search section with dropdown-->
-    <div class="search-section">
-      <form class="search-form" aria-label="Add a city to your world clock" onchange="this.requestSubmit()">
-        <label for="city-select" class="search-label">Select a city to add to your world clock</label>
-        <select id="city-select" class="search-dropdown" name="city" aria-label="City dropdown" required>
-          <option value="America/New_York">New York</option>
-          <option value="Europe/London">London</option>
-          <option value="Asia/Tokyo">Tokyo</option>
-          <option value="Europe/Paris">Paris</option>
-          <option value="Australia/Sydney">Sydney</option>
-        </select>
-      </form>
-    </div>
-
-    <!--Local time (big display)-->
-    <div class="local-time-selection">
-      <h2 class="local-time-label">Your local time</h2>
-      <p class="big-time">--:--:-- --</p>
-      <p class="big-date">---, -- --, ----</p>
-      <p class="timezone-info">America/New York</p>
-    </div>
-
-    <!--City Cards-->
-    <div class="cards-selection">
-      <h2 class="cards-title">Your selected cities</h2>
-      <div class="cards-container">
-
-        <!--City Firsts Card-->
-        <div class="city-card">
-          <h3 class="city-name">New York</h3>
-          <p class="country-name"> United States</p>
-          <p class="card-time">--:--:-- --</p>
-          <p class="card-date">---, -- --</p>
-        </div>
-
-        <!--City Second Card-->
-        <div class="city-card">
-          <h3 class="city-name">London</h3>
-          <p class="country-name"> United Kingdom</p>
-          <p class="card-time">--:--:-- --</p>
-          <p class="card-date">---, -- --</p>
-        </div>
-
-        <!--City Third Card-->
-        <div class="city-card">
-          <h3 class="city-name">Tokyo</h3>
-          <p class="country-name"> Japan</p>
-          <p class="card-time">--:--:-- --</p>
-          <p class="card-date">---, -- --</p>
+    <main>
+      <!--Search section with dropdown-->
+      <div class="search-section">
+        <form class="search-form" aria-label="Add a city to your world clock" onchange="this.requestSubmit()">
+          <label for="city-select" class="search-label">Select a city to add to your world clock</label>
+          <select id="city-select" class="search-dropdown" name="city" aria-label="City dropdown" required>
+            <option disabled selected value="">-- Choose a city --</option>
+            <option value="America/New_York">New York</option>
+            <option value="Europe/London">London</option>
+            <option value="Asia/Tokyo">Tokyo</option>
+            <option value="Europe/Paris">Paris</option>
+            <option value="Australia/Sydney">Sydney</option>
+          </select>
+        </form>
+      </div>
+      
+      <!--Local time (big display)-->
+      <div class="local-time-selection">
+        <h2 class="local-time-label">Your local time</h2>
+      
+        <!--Local Clock-->
+        <div class="city-time-block">
+          <p class="big-time">--:--:-- --</p>
+          <p class="big-date">---, -- --, ----</p>
+          <p class="timezone-info">America/New_York</p>
         </div>
       </div>
-    </div>
+      
+      <!--City Cards-->
+      <div class="cards-selection">
+        <h2 class="cards-title">Other Places</h2>
+        <div class="cards-container">
+      
+          <!--City First Card-->
+          <div class="city-card">
+            <h3 class="city-name">New York</h3>
+            <p class="country-name"> United States</p>
+            <p class="card-time">--:--:-- --</p>
+            <p class="card-date">---, -- --</p>
+          </div>
+      
+          <!--City Second Card-->
+          <div class="city-card">
+            <h3 class="city-name">London</h3>
+            <p class="country-name"> United Kingdom</p>
+            <p class="card-time">--:--:-- --</p>
+            <p class="card-date">---, -- --</p>
+          </div>
+      
+          <!--City Third Card-->
+          <div class="city-card">
+            <h3 class="city-name">Tokyo</h3>
+            <p class="country-name"> Japan</p>
+            <p class="card-time">--:--:-- --</p>
+            <p class="card-date">---, -- --</p>
+          </div>
+      
+        </div>
+      </div>
+    </main>
 
     <!--Footer-->
     <footer class="footer">
-      <p class="signature">Created with ⏰ by <strong>Camilla C.</strong> and is open source on <a href="https://github.com/hicamilla"><strong>GitHub</strong></a></p>
+      <p class="signature">Created with ⏰ by <strong>Camilla C.</strong> and is open source on
+        <a href="https://github.com/hicamilla" target="_blank" rel="noopener noreferrer"><strong>GitHub</strong></a>
+      </p>
     </footer>
   </div>
+
   <!--Script-->
   <script src="./js/script.js"></script>
 </body>
+
 </html>
