@@ -1,68 +1,109 @@
-const localTimeEl = document.querySelector(".big-time");
-const localDateEl = document.querySelector(".big-date");
-const timezoneInfoEl = document.querySelector(".timezone-info");
-const cityForm = document.querySelector(".search-form");
 const citySelect = document.querySelector("#city-select");
+const cardsContainer = document.querySelector(".cards-container");
 
-// Main clock updater (always local time)
+const predefinedCities = [
+  { name: "New York", zone: "America/New York" },
+  { name: "London", zone: "Europe/London" },
+  { name: "Tokyo", zone: "Asia/Tokyo" },
+  { name: "Sydney", zone: "Australia/Sydney" },
+  { name: "São Paulo", zone: "America/São Paulo" },
+  { name: "Madrid", zone: "Europe/Madrid" },
+];
+
+let currentInterval;
+
+// ⬅️ Setup Back Button
+const backButton = document.createElement("button");
+backButton.textContent = "Back to World Clock";
+backButton.classList.add("back-button");
+backButton.style.margin = "0 0 20px 20px";
+backButton.style.padding = "10px 16px";
+backButton.style.fontFamily = "Gambetta";
+backButton.style.fontSize = "15px";
+backButton.style.fontWeight = "700";
+backButton.style.textTransform = "uppercase";
+backButton.style.cursor = "pointer";
+backButton.style.display = "none";
+document.querySelector(".cards-selection").appendChild(backButton);
+
+// ⏱ Render city card
+function renderCityCard(cityName, timezone) {
+  const now = moment().tz(timezone);
+  return `
+    <div class="city-card">
+      <h3 class="city-name">${cityName}</h3>
+      <p class="country-name">${timezone}</p></p>
+      <p class="card-time">${now.format("h:mm:ss A")}</p>
+      <p class="card-date">${now.format("ddd, MMMM D, YYYY")}
+    </div>
+  `;
+}
+
+// 🔄 Update current card time
+function updateTime(timezone) {
+  const now = moment().tz(timezone);
+  const timeEl = document.querySelector(".card-time");
+  const dateEl = document.querySelector(".card-date");
+
+  if (timeEl) timeEl.textContent = now.format("h:mm:ss A");
+  if (dateEl) dateEl.textContent = now.format("ddd, MMMM D, YYYY");
+}
+
+// ✅ Show one selected city
+function showSelectedCity(cityName, timezone) {
+  clearInterval(currentInterval);
+  cardsContainer.innerHTML = renderCityCard(cityName, timezone);
+  currentInterval = setInterval(() => updateTime(timezone), 1000);
+  backButton.style.display = "inline-block";
+}
+
+// 🌍 Show all cities
+function showAllCities() {
+  clearInterval(currentInterval);
+  cardsContainer.innerHTML = "";
+
+  predefinedCities.forEach((city) => {
+    cardsContainer.innerHTML += renderCityCard(city.name, city.zone);
+  });
+
+  currentInterval = setInterval(() => {
+    const cards = document.querySelectorAll(".city-card");
+    cards.forEach((card) => {
+      const name = card.querySelector(".city-name").textContent.trim();
+      const timezone = predefinedCities.find((c) => c.name === name)?.zone;
+      if (timezone) {
+        const now = moment().tz(timezone);
+        card.querySelector(".card-time").textContent = now.format("h:mm:ss A");
+        card.querySelector(".card-date").textContent = now.format("ddd, MMMM D, YYYY");
+      }
+    });
+  }, 1000);
+
+  backButton.style.display = "none";
+}
+
+// 🕐 Show local time (only when all cities visible)
 function updateLocalTime() {
-  const now = new Date();
-  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-  localTimeEl.textContent = now.toLocaleTimeString("en-US", { timeZone });
-  localDateEl.textContent = now.toLocaleDateString("en-US", {
-    timeZone,
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-  timezoneInfoEl.textContent = timeZone;
+  const localZone = moment.tz.guess();
+  const now = moment().tz(localZone);
+  document.getElementById("local-timezone").textContent = localZone;
+  document.getElementById("local-time").textContent = now.format("h:mm:ss A");
+  document.getElementById("local-date").textContent = now.format("ddd,  MMMM D, YYYY");
 }
 
-// Static city cards - update every second
-function initializeExistingCards() {
-  const cards = document.querySelectorAll(".cards-selection .city-card");
+// 📤 Dropdown change
+citySelect.addEventListener("change", (event) => {
+  const timezone = event.target.value;
+  const cityName = event.target.options[event.target.selectedIndex].text;
+  showSelectedCity(cityName, timezone);
+});
 
-  cards.forEach(card => {
-    const cityName = card.querySelector(".city-name")?.textContent.trim();
-    const timezone = guessTimeZoneFromCity(cityName);
+// 🔙 Back button click
+backButton.addEventListener("click", showAllCities);
 
-    function updateCardTime() {
-      const now = new Date();
-      const time = now.toLocaleTimeString("en-US", { timeZone: timezone });
-      const date = now.toLocaleDateString("en-US", {
-        timeZone: timezone,
-        weekday: "short",
-        month: "short",
-        day: "numeric",
-      });
-
-      card.querySelector(".card-time").textContent = time;
-      card.querySelector(".card-date").textContent = date;
-    }
-
-    updateCardTime();
-    setInterval(updateCardTime, 1000);
-  });
-}
-
-// City name → timezone map
-function guessTimeZoneFromCity(cityName) {
-  const map = {
-    "New York": "America/New_York",
-    "London": "Europe/London",
-    "Tokyo": "Asia/Tokyo",
-    "Paris": "Europe/Paris",
-    "Sydney": "Australia/Sydney"
-  };
-
-  return map[cityName] || Intl.DateTimeFormat().resolvedOptions().timeZone;
-}
-
-// Init
+// 🚀 Init on page load
 window.addEventListener("DOMContentLoaded", () => {
   updateLocalTime();
   setInterval(updateLocalTime, 1000);
-  initializeExistingCards();
+  showAllCities();
 });
